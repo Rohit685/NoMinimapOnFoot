@@ -33,23 +33,9 @@ namespace NoMinimapOnFoot
             }   
         }
 
-        internal static bool IsPlayerInVehicle()
-        {
-            return Player.IsInAnyVehicle(false);
-        }
+        internal static bool IsPlayerInVehicle() => Player.IsInAnyVehicle(false);
 
-        internal static void ToggleMinimap()
-        {
-            if (NativeFunction.Natives.IS_RADAR_HIDDEN<bool>())
-            {
-                NativeFunction.Natives.DISPLAY_RADAR(true);
-                return;
-            }
-            else
-            {
-                NativeFunction.Natives.DISPLAY_RADAR(false);
-            }
-        }
+        internal static void ToggleMinimap() => NativeFunction.Natives.DISPLAY_RADAR(NativeFunction.Natives.IS_RADAR_HIDDEN<bool>());
         
         internal static bool CheckModifierKey() => Settings.ModifierKey == Keys.None ? true : Game.IsKeyDownRightNow(Settings.ModifierKey);
     }
