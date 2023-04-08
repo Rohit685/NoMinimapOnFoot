@@ -26,9 +26,9 @@ namespace NoMinimapOnFoot
                     NativeFunction.Natives.DISPLAY_RADAR(false);
                 }
 
-                if (CheckModifierKey() && Game.IsKeyDownRightNow(Settings.ShowMap))
+                if (!IsPlayerInVehicle() && CheckModifierKey() && Game.IsKeyDownRightNow(Settings.ShowMap))
                 {
-                    ToggleMinimapOn();
+                    ToggleMinimap();
                 }
             }   
         }
@@ -38,11 +38,16 @@ namespace NoMinimapOnFoot
             return Player.IsInAnyVehicle(false);
         }
 
-        internal static void ToggleMinimapOn()
+        internal static void ToggleMinimap()
         {
             if (NativeFunction.Natives.IS_RADAR_HIDDEN<bool>())
             {
                 NativeFunction.Natives.DISPLAY_RADAR(true);
+                return;
+            }
+            else
+            {
+                NativeFunction.Natives.DISPLAY_RADAR(false);
             }
         }
         
