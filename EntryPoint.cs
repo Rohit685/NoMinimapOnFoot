@@ -52,5 +52,11 @@ namespace NoMinimapOnFoot
         }
         
         internal static bool CheckModifierKey() => Settings.ModifierKey == Keys.None ? true : Game.IsKeyDownRightNow(Settings.ModifierKey);
+        
+        internal static void OnUnload(bool Exit)
+        {
+            NativeFunction.Natives.DISPLAY_RADAR(true);
+            Game.LogTrivial("NoMinimapOnFoot Unloaded.");
+        }
     }
 }
