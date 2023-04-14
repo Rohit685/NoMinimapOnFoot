@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using Rage;
+using static NoMinimapOnFoot.EntryPoint;
 
 namespace NoMinimapOnFoot
 {
@@ -7,7 +8,7 @@ namespace NoMinimapOnFoot
     {
         internal static Keys ShowMap = Keys.L;
         internal static Keys ModifierKey = Keys.LShiftKey;
-        
+        internal static string typeOfDisabling = MinimapDisabledDisplayType.HIDE.ToString();
         internal static InitializationFile iniFile;
         
         internal static void Initialize()
@@ -18,6 +19,7 @@ namespace NoMinimapOnFoot
                 iniFile.Create();
                 ShowMap = iniFile.ReadEnum("Keybinds", "ShowMap", ShowMap);
                 ModifierKey = iniFile.ReadEnum("Keybinds", "ModifierKey", ModifierKey);
+                typeOfDisabling = iniFile.ReadString("Customization", "typeOfDisabling",typeOfDisabling.ToString());
             }
             catch(System.Exception e)
             {
